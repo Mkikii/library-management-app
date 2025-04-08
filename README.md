@@ -117,24 +117,37 @@ The screenshot shows:
 
 ## Deployment
 
-The application is optimized for Heroku deployment:
+The application is configured for PythonAnywhere deployment:
 
 1. Initial setup:
 ```bash
-heroku create library-management-app
-heroku addons:create heroku-postgresql:hobby-dev
+# Clone repository on PythonAnywhere
+cd ~
+git clone https://github.com/yourusername/library-management-app.git
+python3.9 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
 2. Configure environment:
 ```bash
-heroku config:set SECRET_KEY=$(python -c 'import secrets; print(secrets.token_hex(16))')
-heroku config:set FLASK_ENV=production
+# Set up MySQL database in PythonAnywhere
+# Add environment variables in Web tab
+FLASK_APP=run.py
+SECRET_KEY=your-secure-key
+PYTHONPATH=/home/yourusername/library-management-app
 ```
 
-3. Deploy:
+3. Initialize database:
 ```bash
-git push heroku main
-heroku run flask db upgrade
+flask db upgrade
+python scripts/sample_data.py  # Optional: for sample data
+```
+
+4. Configure static files:
+```bash
+# In the Web tab, set the path for static files
+STATIC_ROOT=/home/yourusername/library-management-app/app/static
 ```
 
 ## Performance Considerations
