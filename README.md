@@ -155,37 +155,37 @@ heroku run flask db upgrade
 
 ```bash
 library-management-app/
-├── app/                        # Application package
-│   ├── static/                # Static files
-│   │   ├── css/              # CSS stylesheets
-│   │   │   └── style.css     # Custom styles
-│   │   └── js/               # JavaScript files
-│   │       ├── main.js       # Main JavaScript
-│   │       └── vue-components.js # Vue.js components
-│   ├── templates/            # Jinja2 templates
-│   │   ├── base.html        # Base template
-│   │   ├── index.html       # Dashboard template
-│   │   ├── books.html       # Books management
-│   │   ├── members.html     # Members management
-│   │   └── transactions.html # Transactions management
-│   ├── __init__.py          # App factory
-│   ├── models.py            # Database models
-│   ├── routes.py            # Route handlers
-│   └── services.py          # Business logic layer
-├── tests/                    # Test suite
+├── app/                            # Application package
+│   ├── static/                     # Static files
+│   │   ├── css/                    # CSS stylesheets
+│   │   │   └── style.css           # Custom styles
+│   │   └── js/                     # JavaScript files
+│   │       ├── main.js             # Main JavaScript
+│   │       └── vue-components.js   # Vue.js components
+│   ├── templates/                  # Jinja2 templates
+│   │   ├── base.html               # Base template
+│   │   ├── index.html              # Dashboard template
+│   │   ├── books.html              # Books management
+│   │   ├── members.html            # Members management
+│   │   └── transactions.html       # Transactions management
+│   ├── __init__.py                 # App factory
+│   ├── models.py                   # Database models
+│   ├── routes.py                   # Route handlers
+│   └── services.py                 # Business logic layer
+├── tests/                          # Test suite
 │   ├── __init__.py
-│   ├── test_models.py       # Model tests
-│   ├── test_routes.py       # Route tests
-│   └── test_services.py     # Service tests
-├── .env                     # Environment variables
-├── .gitignore              # Git ignore rules
-├── app.json                # Heroku app config
-├── config.py               # App configuration
-├── Procfile               # Heroku deployment
-├── README.md              # Documentation
-├── requirements.txt       # Dependencies
-├── runtime.txt           # Python version
-└── run.py                # Application entry
+│   ├── test_models.py              # Model tests
+│   ├── test_routes.py              # Route tests
+│   └── test_services.py            # Service tests
+├── .env                            # Environment variables
+├── .gitignore                      # Git ignore rules
+├── app.json                        # Heroku app config
+├── config.py                       # App configuration
+├── Procfile                        # Heroku deployment
+├── README.md                       # Documentation
+├── requirements.txt                # Dependencies
+├── runtime.txt                     # Python version
+└── run.py                          # Application entry
 ```
 
 ### Directory Structure Explanation
