@@ -1,12 +1,15 @@
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, flash
 from app.models import db, Book, Member, Transaction
 from datetime import datetime
+from functools import lru_cache
+from flask_cors import CORS
 
 bp = Blueprint('main', __name__)
+CORS(bp)  # Enable CORS for API endpoints
 
-@bp.route('/')
-def index():
-    stats = {
+@lru_cache(maxsize=32)
+def get_dashboard_stats():
+    return {
         'total_books': Book.query.count(),
         'available_books': Book.query.filter(Book.quantity > 0).count(),
         'total_members': Member.query.count(),
@@ -14,6 +17,10 @@ def index():
         'total_revenue': db.session.query(db.func.sum(Transaction.rent_fee)).scalar() or 0,
         'total_debt': db.session.query(db.func.sum(Member.debt)).scalar() or 0
     }
+
+@bp.route('/')
+def index():
+    stats = get_dashboard_stats()
     return render_template('index.html', stats=stats)
 
 @bp.route('/books', methods=['GET', 'POST'])

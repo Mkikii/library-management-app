@@ -4,6 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 class Book(db.Model):
+    __table_args__ = (
+        db.Index('idx_book_title_author', 'title', 'author'),
+    )
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     author = db.Column(db.String(100), nullable=False)
@@ -18,6 +21,9 @@ class Member(db.Model):
     transactions = db.relationship('Transaction', backref='member', lazy=True)
 
 class Transaction(db.Model):
+    __table_args__ = (
+        db.Index('idx_transaction_dates', 'issue_date', 'return_date'),
+    )
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column(db.Integer, db.ForeignKey('book.id'), nullable=False)
     member_id = db.Column(db.Integer, db.ForeignKey('member.id'), nullable=False)

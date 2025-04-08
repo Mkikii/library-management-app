@@ -1,0 +1,23 @@
+{
+  "name": "Library Management System",
+  "description": "A Flask-based library management system",
+  "repository": "https://github.com/yourusername/library-management-app",
+  "keywords": ["python", "flask", "library"],
+  "addons": [
+    "heroku-postgresql:hobby-dev"
+  ],
+  "env": {
+    "SECRET_KEY": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "FLASK_ENV": {
+      "value": "production"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}
