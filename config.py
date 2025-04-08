@@ -8,11 +8,22 @@ if not os.getenv('PYTHONANYWHERE_SITE'):
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-key-123'
-    # Update database config for PythonAnywhere MySQL
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        f"mysql://{os.getenv('PYTHONANYWHERE_USERNAME')}:{os.getenv('PYTHONANYWHERE_PASSWORD')}@{os.getenv('PYTHONANYWHERE_USERNAME')}.mysql.pythonanywhere-services.com/{os.getenv('PYTHONANYWHERE_DATABASE')}"
-    if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
-        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1)
+
+    # Database Configuration
+    if os.getenv('PYTHONANYWHERE_SITE'):
+        # PythonAnywhere MySQL configuration
+        SQLALCHEMY_DATABASE_URI = (
+            f"mysql://{os.getenv('PYTHONANYWHERE_USERNAME')}:"
+            f"{os.getenv('PYTHONANYWHERE_PASSWORD')}@"
+            f"{os.getenv('MYSQL_HOST')}/"
+            f"{os.getenv('PYTHONANYWHERE_DATABASE')}"
+        )
+    else:
+        # Local PostgreSQL configuration
+        SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+        if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
+            SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1)
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_SECURE = True
