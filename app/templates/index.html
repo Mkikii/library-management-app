@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Books</h5>
+                <h2>{{ stats.total_books }}</h2>
+                <p>Available books: {{ stats.available_books }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Members</h5>
+                <h2>{{ stats.total_members }}</h2>
+                <p>Active loans: {{ stats.active_loans }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Revenue</h5>
+                <h2>KES {{ "%.2f"|format(stats.total_revenue) }}</h2>
+                <p>Outstanding: KES {{ "%.2f"|format(stats.total_debt) }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

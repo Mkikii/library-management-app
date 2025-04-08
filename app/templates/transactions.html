@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Transactions{% endblock %}
+
+{% block content %}
+<div class="row mb-4">
+    <div class="col-md-6">
+        <h3>Issue Book</h3>
+        <form method="POST" action="{{ url_for('main.issue_book') }}">
+            <div class="mb-3">
+                <select name="book_id" class="form-control" required>
+                    <option value="">Select Book</option>
+                    {% for book in books %}
+                        {% if book.quantity > 0 %}
+                            <option value="{{ book.id }}">{{ book.title }} by {{ book.author }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-3">
+                <select name="member_id" class="form-control" required>
+                    <option value="">Select Member</option>
+                    {% for member in members %}
+                        <option value="{{ member.id }}" {% if member.debt > 500 %}disabled{% endif %}>
+                            {{ member.name }} (Debt: KES {{ "%.2f"|format(member.debt) }})
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Issue Book</button>
+        </form>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <h3>Active Transactions</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Member</th>
+                    <th>Issue Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trans in active_transactions %}
+                <tr>
+                    <td>{{ trans.book.title }}</td>
+                    <td>{{ trans.member.name }}</td>
+                    <td>{{ trans.issue_date.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('main.return_book') }}" style="display: inline;">
+                            <input type="hidden" name="transaction_id" value="{{ trans.id }}">
+                            <button type="submit" class="btn btn-sm btn-success">Return</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

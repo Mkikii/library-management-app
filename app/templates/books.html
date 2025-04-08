@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Books{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-4">
+        <h3>Add New Book</h3>
+        <form method="POST">
+            <div class="mb-3">
+                <input type="text" class="form-control" name="title" placeholder="Book Title" required>
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" name="author" placeholder="Author" required>
+            </div>
+            <div class="mb-3">
+                <input type="number" class="form-control" name="quantity" placeholder="Quantity" required min="1">
+            </div>
+            <button type="submit" class="btn btn-primary">Add Book</button>
+        </form>
+    </div>
+    <div class="col-md-8">
+        <h3>Book List</h3>
+        <input type="text" id="bookSearch" class="form-control mb-3" placeholder="Search books...">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Available</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.quantity }}</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary" onclick="editBook({{ book.id }})">Edit</button>
+                        <button class="btn btn-sm btn-danger" onclick="deleteBook({{ book.id }})">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
