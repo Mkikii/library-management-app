@@ -14,3 +14,4 @@ brotli==1.0.9
 Flask-CORS==4.0.0
 redis==4.5.1
 Flask-Redis==0.4.0
+sqlalchemy-utils==0.41.1

@@ -14,7 +14,7 @@ from app import create_app, db
 
 class TestConfig:
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost/library_test_db'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:postgres@localhost:5432/library_test_db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     WTF_CSRF_ENABLED = False
     SECRET_KEY = 'test-key-123'
@@ -30,6 +30,14 @@ class TestConfig:
 @pytest.fixture(scope='session')
 def app():
     """Create application for the tests."""
+    # Initialize the database
+    from sqlalchemy_utils import create_database, database_exists, drop_database
+    db_url = TestConfig.SQLALCHEMY_DATABASE_URI
+
+    if database_exists(db_url):
+        drop_database(db_url)
+    create_database(db_url)
+
     app = create_app(TestConfig)
 
     with app.app_context():
@@ -39,6 +47,7 @@ def app():
         # Cleanup after all tests
         db.session.remove()
         db.drop_all()
+        drop_database(db_url)
 
 @pytest.fixture(scope='function')
 def client(app):
