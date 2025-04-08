@@ -2,6 +2,8 @@
 
 A professional web application for library management built with Flask and Vue.js, featuring a modular architecture and comprehensive test coverage.
 
+> **Development Status**: 🚧 Under Active Development
+
 ## Tech Stack & Architecture
 
 ### Backend
@@ -49,6 +51,49 @@ A professional web application for library management built with Flask and Vue.j
 - Revenue tracking
 - Stock monitoring
 - Active loans overview
+
+## Planned Improvements
+
+### Authentication & Authorization
+- [ ] Implement user authentication system
+- [ ] Add role-based access control (Admin, Librarian, Member)
+- [ ] Add OAuth2 support for social login
+- [ ] Session management and security enhancements
+
+### Database & Performance
+- [ ] Implement database connection pooling optimization
+- [ ] Add database query caching layer
+- [ ] Implement async database operations for heavy tasks
+- [ ] Add full-text search capabilities for books
+
+### UI/UX Improvements
+- [ ] Add dark mode support
+- [ ] Implement responsive design for mobile devices
+- [ ] Add book cover image upload functionality
+- [ ] Implement real-time notifications for due dates
+
+### API Enhancements
+- [ ] Complete API documentation using OpenAPI/Swagger
+- [ ] Implement API versioning
+- [ ] Add rate limiting for all endpoints
+- [ ] Implement webhook notifications for events
+
+### Monitoring & Logging
+- [ ] Add structured logging
+- [ ] Implement error tracking and reporting
+- [ ] Add performance monitoring
+- [ ] Create admin dashboard for system metrics
+
+### Testing & Quality
+- [ ] Add integration tests for all API endpoints
+- [ ] Implement end-to-end testing
+- [ ] Add load testing scripts
+
+### Deployment & DevOps
+- [ ] Set up CI/CD pipeline
+- [ ] Add Docker containerization
+- [ ] Implement automated backup system
+- [ ] Add environment-specific configuration management
 
 ## Code Quality
 
