@@ -22,6 +22,9 @@ venv/
 # Logs
 *.log
 
+# Scripts
+scripts/
+
 # Local development
 instance/
 .webassets-cache

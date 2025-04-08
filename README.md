@@ -104,6 +104,17 @@ flask db upgrade
 flask run
 ```
 
+## Database Verification
+
+You can verify the database contents using psql:
+
+![Database Verification](screenshots/db_data_lookup.png)
+
+The screenshot shows:
+- Proper table structure creation
+- Data integrity verification
+- Database connectivity confirmation
+
 ## Deployment
 
 The application is optimized for Heroku deployment:
@@ -216,29 +227,43 @@ library-management-app/
 
 ## Screenshots
 
-### Dashboard
-![Dashboard](/screenshots/dashboard.png)
-- Real-time statistics overview
-- Current book inventory status
-- Active loans and revenue tracking
+### Dashboard View
+![Dashboard View](screenshots/library_manager.png)
 
-### Book Management
-![Books](/screenshots/books.png)
-- Book inventory management
-- Real-time search functionality
-- Stock tracking
+The main dashboard showing:
+- Statistics overview with cards
+- System activity metrics
+- System-wide performance indicators
+
+### Books Management
+![Book List](screenshots/book_list_3.png)
+![Book List](screenshots/book_list_1.png)
+![Book List](screenshots/book_list_2.png)
+
+The book management interfaces show:
+- Complete book catalog with search functionality
+- Add/Edit/Delete book operations
+- Real-time inventory tracking
+- Stock level monitoring
 
 ### Member Management
-![Members](/screenshots/members.png)
-- Member registration and management
-- Debt tracking system
-- Transaction history view
+![Member List](screenshots/members_list.png)
 
-### Transaction System
-![Transactions](/screenshots/transactions.png)
-- Book issue/return interface
-- Automatic fee calculation
-- Active loans tracking
+The member section displays:
+- Member registration and profiles
+- Debt tracking and history
+- Active loans monitoring
+- Member activity statistics
+
+### Transaction Management
+![Transaction List](screenshots/transactions_2.png)
+![Transaction Details](screenshots/transactions_1.png)
+
+The transaction interface includes:
+- Active loans overview
+- Book checkout process
+- Return processing
+- Fee calculations
 
 This structure follows:
 - Separation of concerns
