@@ -86,7 +86,11 @@ pip install -r requirements.txt
 2. Configure environment:
 ```bash
 cp .env.example .env
-# Edit .env with your settings
+# Edit .env with your settings:
+# - Generate a secure SECRET_KEY
+# - Update DATABASE_URL with your PostgreSQL credentials
+# - Configure email settings if needed
+# - Adjust other settings as required
 ```
 
 3. Initialize database:

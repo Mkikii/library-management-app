@@ -1,11 +1,10 @@
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from app import db
 
 class Book(db.Model):
     __table_args__ = (
         db.Index('idx_book_title_author', 'title', 'author'),
+        db.Index('idx_book_quantity', 'quantity'),  # Add index for quantity queries
     )
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)

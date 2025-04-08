@@ -4,9 +4,16 @@ from datetime import datetime
 from functools import lru_cache
 from flask_cors import CORS
 from app.services import TransactionService
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 bp = Blueprint('main', __name__)
 CORS(bp)  # Enable CORS for API endpoints
+
+limiter = Limiter(
+    key_func=get_remote_address,
+    default_limits=["200 per day", "50 per hour"]
+)
 
 @lru_cache(maxsize=32)
 def get_dashboard_stats():
@@ -129,6 +136,7 @@ def transaction_history(member_id):
     } for t in transactions])
 
 @bp.route('/search/books')
+@limiter.limit("30 per minute")
 def search_books():
     query = request.args.get('q', '')
     books = Book.query.filter(
