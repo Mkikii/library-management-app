@@ -2,11 +2,17 @@ import os
 from dotenv import load_dotenv
 from datetime import timedelta
 
-load_dotenv()
+# Only load .env in development
+if not os.getenv('PYTHONANYWHERE_SITE'):
+    load_dotenv()
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-key-123'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    # Update database config for PythonAnywhere MySQL
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+        f"mysql://{os.getenv('PYTHONANYWHERE_USERNAME')}:{os.getenv('PYTHONANYWHERE_PASSWORD')}@{os.getenv('PYTHONANYWHERE_USERNAME')}.mysql.pythonanywhere-services.com/{os.getenv('PYTHONANYWHERE_DATABASE')}"
+    if SQLALCHEMY_DATABASE_URI and SQLALCHEMY_DATABASE_URI.startswith('postgres://'):
+        SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI.replace('postgres://', 'postgresql://', 1)
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_SECURE = True
