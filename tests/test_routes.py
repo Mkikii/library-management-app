@@ -1,5 +1,6 @@
 import sys
 import os
+import uuid
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 import pytest
@@ -8,14 +9,14 @@ from app.models import db, Book, Member, Transaction
 from datetime import datetime
 from tests.conftest import TestConfig  # Import TestConfig
 
-# Remove the app fixture as it's now in conftest.py
-# Use the fixture from conftest.py instead
+def generate_unique_email():
+    return f"test_{uuid.uuid4().hex[:8]}@test.com"
 
 def test_index_route(client):
     response = client.get('/')
     assert response.status_code == 200
 
-def test_add_book(client):
+def test_add_book(client, db_session):
     response = client.post('/books', data={
         'title': 'Test Book',
         'author': 'Test Author',
@@ -27,11 +28,11 @@ def test_add_book(client):
         assert book is not None
         assert book.quantity == 5
 
-def test_issue_book(client):
+def test_issue_book(client, db_session):
     # First create test data
     with client.application.app_context():
         book = Book(title='Test Book', author='Test Author', quantity=1)
-        member = Member(name='Test Member', email='test@test.com')
+        member = Member(name='Test Member', email=generate_unique_email())
         db.session.add_all([book, member])
         db.session.commit()
 

@@ -57,12 +57,15 @@ def client(app):
 def db_session(app):
     """Create a fresh database session for each test."""
     with app.app_context():
-        # Clear data between tests
+        # Clear all data between tests
+        db.session.close()
+        db.session.rollback()
         for table in reversed(db.metadata.sorted_tables):
             db.session.execute(table.delete())
         db.session.commit()
 
         yield db.session
 
-        # Rollback at the end of each test
+        # Cleanup after test
+        db.session.close()
         db.session.rollback()
