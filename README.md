@@ -232,19 +232,16 @@ library-management-app/
 
 The main dashboard showing:
 - Statistics overview with cards
-- System activity metrics
-- System-wide performance indicators
+
 
 ### Books Management
 ![Book List](screenshots/book_list_3.png)
-![Book List](screenshots/book_list_1.png)
 ![Book List](screenshots/book_list_2.png)
 
 The book management interfaces show:
 - Complete book catalog with search functionality
 - Add/Edit/Delete book operations
-- Real-time inventory tracking
-- Stock level monitoring
+
 
 ### Member Management
 ![Member List](screenshots/members_list.png)
@@ -253,11 +250,12 @@ The member section displays:
 - Member registration and profiles
 - Debt tracking and history
 - Active loans monitoring
-- Member activity statistics
 
 ### Transaction Management
 ![Transaction List](screenshots/transactions_2.png)
-![Transaction Details](screenshots/transactions_1.png)
+![Transaction Details](screenshots/book_issued_successfully.png)
+![Transaction Details](screenshots/book_issued_successfully_1.png)
+![Transaction Details](screenshots/book_returned_successfully.png)
 
 The transaction interface includes:
 - Active loans overview
