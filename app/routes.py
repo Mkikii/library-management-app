@@ -3,6 +3,7 @@ from app.models import db, Book, Member, Transaction
 from datetime import datetime
 from functools import lru_cache
 from flask_cors import CORS
+from app.services import TransactionService
 
 bp = Blueprint('main', __name__)
 CORS(bp)  # Enable CORS for API endpoints
@@ -77,23 +78,14 @@ def update_book(book_id):
 
 @bp.route('/issue-book', methods=['POST'])
 def issue_book():
-    book_id = request.form['book_id']
-    member_id = request.form['member_id']
-
-    member = Member.query.get_or_404(member_id)
-    if member.debt > 500:
-        return jsonify({'error': 'Member has too much debt'}), 400
-
-    book = Book.query.get_or_404(book_id)
-    if book.quantity < 1:
-        return jsonify({'error': 'Book out of stock'}), 400
-
-    transaction = Transaction(book_id=book_id, member_id=member_id)
-    book.quantity -= 1
-
-    db.session.add(transaction)
-    db.session.commit()
-    flash('Book issued successfully', 'success')
+    try:
+        transaction = TransactionService.issue_book(
+            request.form['book_id'],
+            request.form['member_id']
+        )
+        flash('Book issued successfully', 'success')
+    except ValueError as e:
+        flash(str(e), 'danger')
     return redirect(url_for('main.transactions'))
 
 @bp.route('/return-book', methods=['POST'])

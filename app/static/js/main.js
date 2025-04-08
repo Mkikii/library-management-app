@@ -8,7 +8,27 @@ $(document).ready(function() {
     });
 });
 
+function showLoading(element) {
+    element.prop('disabled', true).html('<span class="spinner-border spinner-border-sm"></span> Loading...');
+}
+
+function hideLoading(element, originalText) {
+    element.prop('disabled', false).html(originalText);
+}
+
+function showError(message) {
+    const alert = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+    $('.container').prepend(alert);
+}
+
 function editBook(bookId) {
+    const btn = $(event.target);
+    showLoading(btn);
     const row = $(event.target).closest('tr');
     const title = row.find('td:eq(0)').text();
     const author = row.find('td:eq(1)').text();
@@ -31,7 +51,12 @@ function editBook(bookId) {
             })
         })
         .then(response => window.location.reload())
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            showError(error.message);
+        })
+        .finally(() => {
+            hideLoading(btn, 'Edit');
+        });
     }
 }
 
