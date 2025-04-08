@@ -6,7 +6,7 @@ load_dotenv()
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'dev-key-123'
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'postgresql://localhost/library_db'
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     REMEMBER_COOKIE_HTTPONLY = True
     REMEMBER_COOKIE_SECURE = True
@@ -26,7 +26,8 @@ class Config:
     SQLALCHEMY_ENGINE_OPTIONS = {
         'pool_size': 10,
         'pool_recycle': 3600,
-        'pool_pre_ping': True
+        'pool_pre_ping': True,
+        'echo': True  # Add this to see SQL queries during development
     }
 
     # Query timeout for slow query logging

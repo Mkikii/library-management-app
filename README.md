@@ -5,7 +5,7 @@ A professional web application for library management built with Flask and Vue.j
 ## Tech Stack & Architecture
 
 ### Backend
-- **Framework**: Flask 2.0.1 with Blueprints
+- **Framework**: Flask 2.3.3 with Blueprints
 - **Database**: PostgreSQL with SQLAlchemy ORM
 - **Caching**: Function-level caching for performance
 - **API**: RESTful with proper error handling
@@ -145,6 +145,7 @@ heroku run flask db upgrade
 - Compressed static assets
 
 ## Security Features
+- Rate limiting on API endpoints
 - CORS protection
 - SQL injection prevention
 - XSS protection

@@ -1,20 +1,15 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 from app import create_app
 from app.models import db, Book, Member, Transaction
 from datetime import datetime
+from tests.conftest import TestConfig  # Import TestConfig
 
-@pytest.fixture
-def app():
-    app = create_app('testing')
-    with app.app_context():
-        db.create_all()
-        yield app
-        db.session.remove()
-        db.drop_all()
-
-@pytest.fixture
-def client(app):
-    return app.test_client()
+# Remove the app fixture as it's now in conftest.py
+# Use the fixture from conftest.py instead
 
 def test_index_route(client):
     response = client.get('/')

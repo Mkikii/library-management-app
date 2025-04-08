@@ -1,6 +1,10 @@
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import pytest
 from app.services import TransactionService
-from app.models import Book, Member, Transaction
+from app.models import Book, Member, Transaction, db
 
 def test_issue_book_with_debt(app):
     with app.app_context():
